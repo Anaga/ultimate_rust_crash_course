@@ -20,12 +20,8 @@ impl Shot {
     fn points(self) -> i32 {
         match self {
             Shot::Bullseye => 5,
-            Shot::Hit(x) => {
-                if x < 3.0 {2
-                } else {
-                1
-            }
-            },
+            Shot::Hit(x) if x < 3.0 => 2,
+            Shot::Hit(x) => 1,
             Shot::Miss => 0,
         }
         // 1b. Implement this method to convert a Shot into points
