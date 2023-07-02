@@ -39,14 +39,12 @@ fn main() {
 
     for arrow in arrow_coords{
         arrow.print_description();
-        let delta = arrow.distance_from_center();
-        if delta > 5.0 {
-            shots.push(Shot::Miss);
-        } else if delta >= 1.0 {
-            shots.push(Shot::Hit(delta));
-        } else {
-            shots.push(Shot::Bullseye);
-        }
+        let shot = match arrow.distance_from_center(){
+            delta if delta < 1.0 => Shot::Bullseye,
+            delta if delta < 5.0 => Shot::Hit(delta),
+            _ =>Shot::Miss,
+        };
+        shots.push(shot);        
     }
     // 2. For each coord in arrow_coords:
     //
